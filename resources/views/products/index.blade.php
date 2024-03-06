@@ -36,6 +36,16 @@
                         <div class="col-12">
                             <p class="samuraimart-product-label mt-2">
                                 {{$product->name}}<br>
+                                
+                                <!-- 課題箇所 -->
+                                <?php
+                                $averageRating = $product->reviews->avg('score');
+                                $roundedStar = round($averageRating*2, 0)/2;
+                                $roundedRating = round($averageRating, 1); // 小数点第1位を四捨五入
+                                ?>
+                                <span class="star5_rating" data-rate="{{$roundedStar}}"></span>
+                                <span>{{ number_format($roundedRating, 1) }}</span><br>   
+
                                 <label>￥{{$product->price}}</label>
                             </p>
                         </div>

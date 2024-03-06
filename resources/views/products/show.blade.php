@@ -16,6 +16,17 @@
                 <h1 class="">
                     {{$product->name}}
                 </h1>
+                <!-- 課題箇所 -->
+                <?php
+                // 平均評価を数値から星評価に変換して表示する
+                $averageRating = $reviews->avg('score');
+                $roundedStar = round($averageRating*2, 0)/2;
+                $roundedRating = round($averageRating, 1); // 小数点第1位を四捨五入
+                ?>
+                <p>
+                    <span class="star5_rating" data-rate="{{$roundedStar}}"></span>
+                    <span>{{ number_format($roundedRating, 1) }}</span>
+                </p>
                 <p class="">
                     {{$product->description}}
                 </p>
@@ -75,8 +86,13 @@
         <div class="offset-1 col-11">
             <hr class="w-100">
             <h3 class="float-left">カスタマーレビュー</h3>
+            <!-- 課題箇所 -->
+            <span class="star5_rating" data-rate="{{$roundedStar}}"></span>
+            <span>{{ number_format($roundedRating, 1) }}</span>
+            <br>
         </div>
-
+        
+            
         <div class="offset-1 col-10">
             <div class="row">
                 @foreach($reviews as $review)
